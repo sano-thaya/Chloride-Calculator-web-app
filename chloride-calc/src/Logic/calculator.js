@@ -63,3 +63,24 @@ export const getConvergenceData = (params, maxCap = 31) => {
   }
   return dataPoints;
 };
+
+export const parseInputFile = (text) => {
+  const newInputs = {};
+  // This regex splits by any newline character (Windows or Mac/Linux)
+  const lines = text.split(/\r?\n/); 
+  
+  lines.forEach(line => {
+    if (line.includes('=')) {
+      const parts = line.split('=');
+      if (parts.length === 2) {
+        const key = parts[0].trim(); // Removes hidden spaces
+        const value = parts[1].trim();
+        
+        if (value !== '') {
+          newInputs[key] = value;
+        }
+      }
+    }
+  });
+  return newInputs;
+};

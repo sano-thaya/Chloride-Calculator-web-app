@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { calculateChloride, getConvergenceData } from './Logic/calculator';
+import { calculateChloride, getConvergenceData, parseInputFile } from './Logic/calculator';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 function App() {
@@ -28,6 +28,27 @@ function App() {
     setFinalResult(data[data.length - 1].concentration);
   };
 
+  const handleFileUpload = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    const text = event.target.result;
+    console.log("File Content Raw:", text); // DEBUG 1
+
+    const newValues = parseInputFile(text);
+    console.log("Parsed Object:", newValues); // DEBUG 2
+    
+    setInputs(prev => {
+      const updated = { ...prev, ...newValues };
+      console.log("New State will be:", updated); // DEBUG 3
+      return updated;
+    });
+  };
+  reader.readAsText(file);
+};
+
   return (
     <div style={{ padding: "40px", fontFamily: "sans-serif", maxWidth: "1000px", margin: "auto" }}>
       <h1>Chloride Convergence Explorer</h1>
@@ -36,6 +57,12 @@ function App() {
         {/* Left: Inputs */}
         <div style={{ flex: 1 }}>
           <h3>Parameters</h3>
+          <div style={{ marginBottom: "20px", padding: "10px", border: "1px dashed #ccc" }}>
+            <label style={{ display: "block", marginBottom: "5px", fontSize: "14px" }}>
+              Import from .txt file:
+            </label>
+            <input type="file" accept=".txt" onChange={handleFileUpload} />
+          </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
             {Object.keys(inputs).map(key => (
               <div key={key}>
