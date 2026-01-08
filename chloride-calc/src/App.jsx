@@ -2,6 +2,129 @@ import { useState } from 'react';
 import { calculateChloride, getConvergenceData, parseInputFile } from './Logic/calculator';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+const styles = {
+  page: {
+    backgroundColor: "#f0f2f5",
+    minHeight: "100vh",
+    padding: "40px 20px",
+    fontFamily: "'Inter', sans-serif",
+  },
+  container: {
+    maxWidth: "1200px",
+    margin: "0 auto",
+  },
+  header: {
+    marginBottom: "40px",
+    textAlign: "center", // Keeps Heading and Subtitle centered
+  },
+  title: {
+    color: "#1a202c",
+    fontSize: "2.8rem",
+    fontWeight: "800",
+    margin: "0",
+  },
+  subtitle: {
+    color: "#4a5568",
+    fontSize: "1.2rem",
+    marginTop: "10px",
+  },
+  mainGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1.5fr", // Left side is 1 part, Right side is 1.5 parts wide
+    gap: "30px",
+    alignItems: "start",
+  },
+  card: {
+    backgroundColor: "#ffffff",
+    padding: "30px",
+    borderRadius: "20px",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.05)",
+    textAlign: "left", // Ensures all content inside cards starts from the left
+  },
+  cardTitle: {
+    fontSize: "1.4rem",
+    color: "#2d3748",
+    marginBottom: "20px",
+    borderBottom: "2px solid #edf2f7",
+    paddingBottom: "10px",
+  },
+  inputGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr", // Two columns of inputs
+    gap: "20px",
+  },
+  inputGroup: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start", // Aligns labels and inputs to the left
+  },
+  fieldLabel: {
+    fontSize: "13px",
+    fontWeight: "700",
+    color: "#718096",
+    marginBottom: "6px",
+  },
+  input: {
+    width: "100%",
+    padding: "12px",
+    borderRadius: "10px",
+    border: "1px solid #e2e8f0",
+    fontSize: "14px",
+    backgroundColor: "#f8fafc",
+  },
+  button: {
+    width: "100%",
+    marginTop: "25px",
+    padding: "15px",
+    backgroundColor: "#3182ce",
+    color: "white",
+    border: "none",
+    borderRadius: "12px",
+    fontSize: "16px",
+    fontWeight: "700",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+  },
+  resetButton: {
+    width: "100%",
+    marginTop: "12px",
+    padding: "12px",
+    backgroundColor: "transparent",
+    color: "#e53e3e",
+    border: "2px solid #e53e3e",
+    borderRadius: "12px",
+    fontSize: "15px",
+    fontWeight: "600",
+    cursor: "pointer",
+  },
+  resultBox: {
+    marginTop: "30px",
+    padding: "20px",
+    backgroundColor: "#ebf8ff",
+    borderRadius: "15px",
+    textAlign: "center",
+    border: "1px solid #bee3f8",
+  },
+  resultValue: {
+    display: "block",
+    fontSize: "2.2rem",
+    fontWeight: "800",
+    color: "#2b6cb0",
+  },
+  chartContainer: {
+    height: "450px", // Made the graph taller
+    marginTop: "20px",
+  },
+  uploadBox: {
+    marginBottom: "25px",
+    padding: "20px",
+    backgroundColor: "#f7fafc",
+    borderRadius: "12px",
+    border: "2px dashed #cbd5e0",
+    textAlign: "left",
+  }
+};
+
 function App() {
   const [inputs, setInputs] = useState({
     L1: 30, L2: 30, L3: 30,
@@ -28,6 +151,19 @@ function App() {
     setFinalResult(data[data.length - 1].concentration);
   };
 
+    const handleReset = () => {
+    // Reset all state to initial values
+    setInputs(inputs);
+    setPlotData([]);
+    setFinalResult(0);
+    
+    // Reset file input by changing its key
+    setFileKey(Date.now());
+    
+    // Optional: Show a confirmation message
+    console.log("All values have been reset to default");
+  };
+
   const handleFileUpload = (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -50,52 +186,81 @@ function App() {
 };
 
   return (
-    <div style={{ padding: "40px", fontFamily: "sans-serif", maxWidth: "1000px", margin: "auto" }}>
-      <h1>Chloride Convergence Explorer</h1>
-      
-      <div style={{ display: "flex", gap: "40px" }}>
-        {/* Left: Inputs */}
-        <div style={{ flex: 1 }}>
-          <h3>Parameters</h3>
-          <div style={{ marginBottom: "20px", padding: "10px", border: "1px dashed #ccc" }}>
-            <label style={{ display: "block", marginBottom: "5px", fontSize: "14px" }}>
-              Import from .txt file:
-            </label>
-            <input type="file" accept=".txt" onChange={handleFileUpload} />
+  <div style={styles.page}>
+    <div style={styles.container}>
+      {/* Header Section */}
+      <header style={styles.header}>
+        <h1 style={styles.title}>Chloride Diffusion Analyzer</h1>
+        <p style={styles.subtitle}>3D Cubic Diffusion Mathematical Model</p>
+      </header>
+
+      <div style={styles.mainGrid}>
+        
+        {/* LEFT COLUMN: Controls */}
+        <div style={styles.card}>
+          <h3 style={styles.cardTitle}>Input Parameters</h3>
+          
+          <div style={styles.uploadBox}>
+            <label style={styles.label}>Import Configuration</label>
+            <input type="file" accept=".txt" onChange={handleFileUpload} style={styles.fileInput} />
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+
+          <div style={styles.inputGrid}>
             {Object.keys(inputs).map(key => (
-              <div key={key}>
-                <label style={{ fontSize: "12px" }}>{key}</label><br/>
-                <input name={key} type="number" value={inputs[key]} onChange={handleInputChange} style={{ width: "80%" }} />
+              <div key={key} style={styles.inputGroup}>
+                <label style={styles.fieldLabel}>{key}</label>
+                <input 
+                  name={key} 
+                  type="number" 
+                  value={inputs[key]} 
+                  onChange={handleInputChange} 
+                  style={styles.input}
+                />
               </div>
             ))}
           </div>
-          <button onClick={handleCalculate} style={{ width: "100%", marginTop: "20px", padding: "10px", cursor: "pointer" }}>
-            Run Calculation
+
+          <button onClick={handleCalculate} style={styles.button}>
+            Run Analysis
           </button>
-          
-          <div style={{ marginTop: "20px", padding: "15px", background: "#f0f0f0" }}>
-            <strong>Result: {finalResult.toFixed(6)}%</strong>
+          <button onClick={handleReset}style={styles.button}>
+            Reset
+          </button>
+
+          <div style={styles.resultBox}>
+            <span style={styles.resultLabel}>Final Concentration (Cf):</span>
+            <span style={styles.resultValue}>{finalResult.toFixed(6)}%</span>
           </div>
         </div>
 
-        {/* Right: The Chart */}
-        <div style={{ flex: 2, height: "400px", background: "#fff", border: "1px solid #ddd", padding: "10px" }}>
-          <h3>Convergence Plot</h3>
-          <ResponsiveContainer width="100%" height="90%">
-            <LineChart data={plotData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="terms" label={{ value: 'Number of Terms', position: 'insideBottom', offset: -5 }} />
-              <YAxis domain={['auto', 'auto']} />
-              <Tooltip />
-              <Line type="monotone" dataKey="concentration" stroke="#8884d8" dot={true} />
-            </LineChart>
-          </ResponsiveContainer>
+        {/* RIGHT COLUMN: Visualization */}
+        <div style={styles.card}>
+          <h3 style={styles.cardTitle}>Convergence Visualization</h3>
+          <div style={styles.chartContainer}>
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={plotData}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
+                <XAxis dataKey="terms" stroke="#a0aec0" fontSize={12} tickLine={false} axisLine={false} label={{ value: "Number of Terms (n,m,p)", position: "insideBottom", offset: -10 }} />
+                <YAxis stroke="#888" fontSize={12} tickLine={false} axisLine={false} domain={['auto', 'auto']} label={{ value: "Concentration %", angle: -90, position: "insideLeft" }} />
+                <Tooltip contentStyle={styles.tooltip} />
+                <Line 
+                  type="monotone" 
+                  dataKey="concentration" 
+                  stroke="#3182ce" 
+                  strokeWidth={4} 
+                  dot={{ r: 5, fill: "#3182ce", strokeWidth: 2, stroke: "#fff" }}
+                  activeDot={{ r: 6 }} 
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
         </div>
+
       </div>
     </div>
-  );
+  </div>
+);
+
 }
 
 export default App;
