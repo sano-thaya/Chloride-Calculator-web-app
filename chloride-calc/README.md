@@ -27,7 +27,7 @@ It was converted from a Python desktop GUI to a web app for easier use and visua
 ## Screenshots
 
 **Input Page**  
-![Input Page](./assets/screenshots/input.png)
+![Input Page](./assets/screenshots/Input.png)
 
 **Results Page**  
 ![Results Page](./assets/screenshots/Output_Graph.png)
