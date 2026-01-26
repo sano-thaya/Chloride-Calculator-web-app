@@ -164,6 +164,33 @@
   }
 }
 
+@media (max-width: 768px) {
+  .app-header {
+    position: relative;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .header-left {
+    position: static;   /* 🔥 THIS FIXES OVERLAP */
+    display: flex;
+    justify-content: center;
+  }
+
+  .logo {
+    height: 36px;
+  }
+
+  .header-center h1 {
+    font-size: 18px;
+  }
+
+  .header-center p {
+    font-size: 12px;
+  }
+}
+
+
 /* HEADER */
 .app-header {
   display: flex;
