@@ -5,7 +5,7 @@ export default function Footer() {
         © 2026 Free Chloride Concentration Calculator <br />
         <span className="citation">
           Authors: U. Sanathanan - GUI development, implementation, coding,
-                    T. Sanojan - Concert into Web-App,
+                    T. Sanojan - Convert into Web-App,
                     B. V. N. Perera -  Mathematical derivations, <br/> 
                     N. A. P. V. S. Perera -  Mathematical derivations, 
                     P. A. D. Prabodha -  Mathematical derivations, <br/>

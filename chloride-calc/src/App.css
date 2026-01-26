@@ -195,7 +195,8 @@
 .app-header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  gap: 30px;
   padding: 20px;
   border-bottom: 1px solid #e0e0e0;
   background: #21388e;
@@ -203,9 +204,7 @@
 }
 
 .header-left {
-  flex: 1;
-  position: absolute;
-  left: 20px;
+  flex-shrink: 0;
 }
 
 .logo {
@@ -214,7 +213,7 @@
 }
 
 .header-center {
-  flex: 2;
+  flex: 1;
   text-align: center;
 }
 
@@ -244,4 +243,14 @@
 
 .citation {
   font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .app-footer {
+    font-size: 12px;
+    padding: 5px;
+  }
+  .citation {
+    font-size: 10px;
+  }
 }
