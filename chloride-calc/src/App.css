@@ -40,7 +40,7 @@
 }
 
 .card-title {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   border-bottom: 2px solid #edf2f7;
   padding-bottom: 10px;
 }
@@ -52,16 +52,22 @@
   gap: 15px;
 }
 
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
 .input-group label {
-  font-size: 12px;
+  font-size: 15px;
   color: #718096;
+  margin-bottom: 5px;
 }
 
 .input-group input {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
-  margin-top: 5px;
+  width: 100%;
 }
 
 /* UPLOAD */
@@ -81,13 +87,19 @@
   color: white;
   border: none;
   border-radius: 10px;
+  font-size: 20px;
   font-weight: 700;
+}
+
+.button-row {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .button-row button {
   flex: 1; 
 }
-
 
 .reset-btn {
   flex: 1;
@@ -96,6 +108,7 @@
   color: #e53e3e;
   padding: 12px;
   border-radius: 10px;
+  font-size: 18px;
 }
 
 .download-btn {
@@ -105,6 +118,7 @@
   border: none;
   padding: 12px;
   border-radius: 10px;
+  font-size: 18px;
 }
 
 /* RESULT */
@@ -114,6 +128,8 @@
   background: #ebf8ff;
   border-radius: 10px;
   text-align: center;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 /* CHART */
@@ -146,4 +162,59 @@
   .button-row {
     flex-direction: column;
   }
+}
+
+/* HEADER */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  background: #21388e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.header-left {
+  flex: 1;
+  position: absolute;
+  left: 20px;
+}
+
+.logo {
+  height: 150px;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
+}
+
+.header-center {
+  flex: 2;
+  text-align: center;
+}
+
+.header-center h1 {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 900;
+  color: #edf2f7;
+}
+
+.header-center p {
+  margin: 2px 0 0;
+  font-size: 24px;
+  color: #7490d2;
+}
+
+/* FOOTER */
+.app-footer {
+  margin-top: 40px;
+  padding: 10px;
+  text-align: center;
+  font-size: 13px;
+  color: #4c4c4c;
+  border-top: 1px solid #e0e0e0;
+  background-color: #d3d4d5dd;
+}
+
+.citation {
+  font-style: italic;
 }
