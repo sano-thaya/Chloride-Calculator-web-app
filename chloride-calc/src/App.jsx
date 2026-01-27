@@ -104,7 +104,7 @@ function App() {
       margin,
       34
     );
-
+    
     pdf.setFontSize(12);
     pdf.text("Input Parameters", margin, 45);
 
@@ -124,6 +124,37 @@ function App() {
       pdf.text("Convergence Plot Visualization", margin, 20);
       pdf.addImage(imgData, "PNG", margin, 30, 180, 150);
     }
+
+    // Add Citation Page
+    pdf.addPage();
+    pdf.setFontSize(14);
+    pdf.text("Citation & Authors", margin, 20);
+
+    pdf.setFontSize(10);
+    let citationY = 35;
+    const citationText = [
+      "Authors:",
+      "• U. Sanathanan - GUI development, implementation, coding",
+      "• T. Sanojan - Convert into Web-App",
+      "• B. V. N. Perera - Mathematical derivations",
+      "• N. A. P. V. S. Perera - Mathematical derivations",
+      "• P. A. D. Prabodha - Mathematical derivations",
+      "• Guidance of Dr. D.A.S. Amarasinghe",
+      "",
+      "Reference:",
+      "Based on X. Qiu et al. (2024)",
+      "",
+      "© 2026 Free Chloride Concentration Calculator"
+    ];
+
+    citationText.forEach((line) => {
+      if (citationY > 270) {
+        pdf.addPage();
+        citationY = 20;
+      }
+      pdf.text(line, margin + 5, citationY);
+      citationY += 7;
+    });
 
     pdf.save("Chloride_Analysis_Report.pdf");
   };

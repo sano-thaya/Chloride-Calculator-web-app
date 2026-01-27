@@ -146,6 +146,13 @@
 }
 }
 
+@media (max-width: 768px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
 .input-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* default 2 columns */
@@ -189,6 +196,17 @@
     font-size: 12px;
   }
 }
+
+@media (max-width: 768px) {
+  .app-footer {
+    font-size: 12px;
+    padding: 5px;
+  }
+  .citation {
+    font-size: 10px;
+  }
+}
+
 
 
 /* HEADER */
@@ -245,12 +263,3 @@
   font-style: italic;
 }
 
-@media (max-width: 768px) {
-  .app-footer {
-    font-size: 12px;
-    padding: 5px;
-  }
-  .citation {
-    font-size: 10px;
-  }
-}
