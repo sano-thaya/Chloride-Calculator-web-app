@@ -33,21 +33,6 @@ The methodology is based on **X. Qiu et al., 2024**.
 
 ---
 
-## 🖥️ Screenshots
-
-**Input Page**  
-![Input Page](./assets/screenshots/Input.png)
-
-**Generate Graph**
-![Generate Graph](./assets/screenshots/Output.png)
-
-**Calculate Result**
-![Calculate Result](./assets/screenshots/Result.png)
-
-> Replace the image paths with your actual screenshots in `./assets/screenshots/`
-
----
-
 ## ⚙️ Technologies Used
 
 - **Frontend:** React with Vite, Tailwind CSS
@@ -70,13 +55,13 @@ The methodology is based on **X. Qiu et al., 2024**.
       Copy code
       cd chloride-calculator-web
    
-4.  Install dependencies:
+3.  Install dependencies:
 
       bash
       Copy code
       npm install
     
- 5. Start the development server:
+ 4. Start the development server:
  
       bash
       Copy code
