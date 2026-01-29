@@ -38,8 +38,11 @@ The methodology is based on **X. Qiu et al., 2024**.
 **Input Page**  
 ![Input Page](./assets/screenshots/Input.png)
 
-**Results Page**  
-![Results Page](./assets/screenshots/Output_Graph.png)
+**Generate Graph**
+![Generate Graph](./assets/screenshots/Output.png)
+
+**Calculate Result**
+![Calculate Result](./assets/screenshots/Result.png)
 
 > Replace the image paths with your actual screenshots in `./assets/screenshots/`
 
@@ -47,7 +50,8 @@ The methodology is based on **X. Qiu et al., 2024**.
 
 ## ⚙️ Technologies Used
 
-- **Frontend:** React with Vite, Tailwind CSS  
+- **Frontend:** React with Vite, Tailwind CSS
+- **Logic:**  Java Script
 - **Graphing:** Recharts  
 - **PDF Export:** jsPDF, html2canvas  
 
@@ -56,63 +60,61 @@ The methodology is based on **X. Qiu et al., 2024**.
 ## 💻 Installation (Development)
 
 1. Clone the repository:
+      
+      ```bash
+      git clone https://github.com/your-username/chloride-calculator-web.git
+      
+2. Go to the project folder:
 
-```bash
-git clone https://github.com/your-username/chloride-calculator-web.git
-Go to the project folder:
+      bash
+      Copy code
+      cd chloride-calculator-web
+   
+4.  Install dependencies:
 
-bash
-Copy code
-cd chloride-calculator-web
-Install dependencies:
+      bash
+      Copy code
+      npm install
+    
+ 5. Start the development server:
+ 
+      bash
+      Copy code
+      npm run dev
+      Open your browser at http://localhost:5173/
 
-bash
-Copy code
-npm install
-Start the development server:
-
-bash
-Copy code
-npm run dev
-Open your browser at http://localhost:5173/
 
 🚀 Usage
-Enter parameters in the web interface:
 
-Parameter	Description
-L1, L2, L3	Domain dimensions (cm)
-x, y, z	Spatial position (cm)
-Cs	Surface chloride concentration (%)
-Cs0	Initial chloride concentration (%)
-Da	Apparent diffusion coefficient (cm²/year)
-t	Exposure time (years)
-Tolerance	Series convergence criterion (optional)
+1. Enter parameters in the web interface:
+   ( Optional: Load input from .txt or .csv )
+    Parameter	Description
+    L1, L2, L3	Domain dimensions (cm)
+    x, y, z	Spatial position (cm)
+    Cs	Surface chloride concentration (%)
+    Cs0	Initial chloride concentration (%)
+    Da	Apparent diffusion coefficient (cm²/year)
+    t	Exposure time (years)
+    Tolerance	Series convergence criterion (optional)
 
-Click Calculate
-
-View results and the convergence graph
-
-Optional: Load input from .txt or .csv
-
-Click Export PDF to download results
+2. Click Calculate
+3. View results and the convergence graph
+4. Click Export PDF to download results
 
 📜 Export Results as PDF
-After calculation, click the Export PDF button
-
-The app generates a PDF containing input parameters, results, and graphs
-
+After calculation, click the Export PDF button. The app generates a PDF containing input parameters, results, and graphs
 Download the PDF to your computer
+
+🌐 Live Demo (Vercel)
+    https://chloride-calculator-web-app.vercel.app/
 
 👥 Authors
 T. Sanojan – Converted to Web UI & frontend
-
 U. Sanathanan – Original Python GUI development
 
-Git Repo: Free Chloride Concentration Calculator
 
 🙏 Acknowledgments
 Converted from Python desktop GUI under the guidance of Dr. D.A.S. Amarasinghe
-
 Mathematical derivation based on X. Qiu et al., 2024
 
 📖 References
