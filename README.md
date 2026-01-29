@@ -36,7 +36,7 @@ The methodology is based on **X. Qiu et al., 2024**.
 ## 🖥️ Screenshots
 
 **Input Page**  
-![Input Page](./assets/screenshots/Input.png)
+![Input Page](./assets/screenshots/input.png)
 
 **Generate Graph**
 ![Generate Graph](./assets/screenshots/Output.png)
